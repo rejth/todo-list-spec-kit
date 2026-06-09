@@ -110,7 +110,7 @@ Single project at repository root: `src/`, `tests/`
 
 ---
 
-- [ ] T005 **Phase 5: User Story 3 — Delete and Mark Important (P3)** (issue #4)
+- [x] T005 **Phase 5: User Story 3 — Delete and Mark Important (P3)** (issue #4)
 
   **Goal**: Delete persists; important toggle with bold blue styling.
 
@@ -118,13 +118,13 @@ Single project at repository root: `src/`, `tests/`
 
   **TDD cycles**:
 
-  - [ ] RED→GREEN: `"deleteTask removes task and persists"`
-  - [ ] RED→GREEN: `"toggleImportant flips flag and persists"`
+  - [x] RED→GREEN: `"deleteTask removes task and persists"`
+  - [x] RED→GREEN: `"toggleImportant flips flag and persists"`
 
   **UI**:
 
-  - [ ] Delete button (red trash SVG) + Mark Important button (green ! SVG) in `TaskItem.tsx`
-  - [ ] Important + done+important styles in `TaskItem.tsx`, `src/index.css`
+  - [x] Delete button (red trash SVG) + Mark Important button (green ! SVG) in `TaskItem.tsx`
+  - [x] Important + done+important styles in `TaskItem.tsx`, `src/index.css`
 
 ---
 

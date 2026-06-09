@@ -88,6 +88,30 @@ export async function toggleDone(id: number): Promise<void> {
   await patchTask(id, { done: !current.done });
 }
 
+/** Toggles a task's important flag and persists it. */
+export async function toggleImportant(id: number): Promise<void> {
+  const current = tasksSignal().find((task) => task.id === id);
+  if (!current) {
+    return;
+  }
+  await patchTask(id, { important: !current.important });
+}
+
+/** Removes a task from storage and the in-memory list. */
+export async function deleteTask(id: number): Promise<void> {
+  if (!service) {
+    setError("Storage is not ready.");
+    return;
+  }
+  try {
+    await service.tasks.delete(id);
+    setError(null);
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "Failed to delete task.");
+  }
+  setTasks(tasksSignal().filter((task) => task.id !== id));
+}
+
 /** Test-only: drop the cached service and reset in-memory state. */
 export function resetTaskStore(): void {
   StorageService.reset();

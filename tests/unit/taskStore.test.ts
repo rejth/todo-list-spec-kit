@@ -2,11 +2,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TasksStore } from "../../src/lib/storage/TasksStore";
 import {
   addTask,
+  deleteTask,
   initTaskStore,
   persistenceError,
   resetTaskStore,
   tasks,
   toggleDone,
+  toggleImportant,
 } from "../../src/stores/taskStore";
 
 describe("taskStore.addTask", () => {
@@ -69,6 +71,46 @@ describe("taskStore.toggleDone", () => {
 
     expect(tasks().find((t) => t.id === first.id)?.done).toBe(false);
     expect(tasks().find((t) => t.id === second.id)?.done).toBe(true);
+  });
+});
+
+describe("taskStore.deleteTask", () => {
+  beforeEach(async () => {
+    resetTaskStore();
+    await initTaskStore();
+  });
+
+  it("deleteTask removes task and persists", async () => {
+    await addTask("Keep");
+    await addTask("Remove");
+    const removeId = tasks().find((t) => t.name === "Remove")?.id as number;
+
+    await deleteTask(removeId);
+    expect(tasks().map((t) => t.name)).toEqual(["Keep"]);
+
+    // Gone after reload.
+    resetTaskStore();
+    await initTaskStore();
+    expect(tasks().map((t) => t.name)).toEqual(["Keep"]);
+  });
+});
+
+describe("taskStore.toggleImportant", () => {
+  beforeEach(async () => {
+    resetTaskStore();
+    await initTaskStore();
+  });
+
+  it("toggleImportant flips flag and persists", async () => {
+    await addTask("Have a lunch");
+    const id = tasks()[0].id;
+
+    await toggleImportant(id);
+    expect(tasks()[0].important).toBe(true);
+
+    resetTaskStore();
+    await initTaskStore();
+    expect(tasks()[0].important).toBe(true);
   });
 });
 
