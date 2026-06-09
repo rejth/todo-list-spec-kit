@@ -47,7 +47,7 @@ Single project at repository root: `src/`, `tests/`
 
 ---
 
-- [ ] T002 **Phase 2: Foundational — Storage** — IndexedDB layer + app shell (vertical TDD) (issue #2)
+- [x] T002 **Phase 2: Foundational — Storage** — IndexedDB layer + app shell (vertical TDD) (issue #2)
 
   **Deliverables**: `TasksStore` CRUD tested; `StorageService` lifecycle; store skeleton; app mounts.
 
@@ -55,14 +55,14 @@ Single project at repository root: `src/`, `tests/`
 
   **TDD cycles** (sequential — finish each GREEN before next RED):
 
-  - [ ] Define types in `src/types/task.ts` per `data-model.md`
-  - [ ] RED→GREEN: `"add makes task retrievable by id"` → `TasksStore`, `StorageService` in `src/lib/storage/`
-  - [ ] RED→GREEN: `"getAll returns stored tasks"` → `TasksStore.getAll`
-  - [ ] RED→GREEN: `"update patches task fields"` → `TasksStore.update`
-  - [ ] RED→GREEN: `"delete removes task from getAll"` → `TasksStore.delete`
-  - [ ] Store skeleton: `initTaskStore()`, `tasks`, `persistenceError` in `src/stores/taskStore.ts`
-  - [ ] `getStatusSummary()` in `src/lib/filters.ts`
-  - [ ] Entry `src/index.tsx` + minimal `src/components/App.tsx` with `onMount` init
+  - [x] Define types in `src/types/task.ts` per `data-model.md`
+  - [x] RED→GREEN: `"add makes task retrievable by id"` → `TasksStore`, `StorageService` in `src/lib/storage/`
+  - [x] RED→GREEN: `"getAll returns stored tasks"` → `TasksStore.getAll`
+  - [x] RED→GREEN: `"update patches task fields"` → `TasksStore.update`
+  - [x] RED→GREEN: `"delete removes task from getAll"` → `TasksStore.delete`
+  - [x] Store skeleton: `initTaskStore()`, `tasks`, `persistenceError` in `src/stores/taskStore.ts`
+  - [x] `getStatusSummary()` in `src/lib/filters.ts`
+  - [x] Entry `src/index.tsx` + minimal `src/components/App.tsx` with `onMount` init
 
 ---
 
