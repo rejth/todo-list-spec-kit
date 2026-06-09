@@ -6,6 +6,7 @@ import {
   persistenceError,
   resetTaskStore,
   tasks,
+  toggleDone,
 } from "../../src/stores/taskStore";
 
 describe("taskStore.addTask", () => {
@@ -37,6 +38,37 @@ describe("taskStore.addTask", () => {
     const ids = tasks().map((t) => t.id);
     expect(tasks()).toHaveLength(2);
     expect(ids[0]).not.toBe(ids[1]);
+  });
+});
+
+describe("taskStore.toggleDone", () => {
+  beforeEach(async () => {
+    resetTaskStore();
+    await initTaskStore();
+  });
+
+  it("toggleDone flips done flag and persists", async () => {
+    await addTask("Drink coffee");
+    const id = tasks()[0].id;
+
+    await toggleDone(id);
+    expect(tasks()[0].done).toBe(true);
+
+    // Survives a reload.
+    resetTaskStore();
+    await initTaskStore();
+    expect(tasks()[0].done).toBe(true);
+  });
+
+  it("toggleDone affects only the targeted task", async () => {
+    await addTask("One");
+    await addTask("Two");
+    const [first, second] = tasks();
+
+    await toggleDone(second.id);
+
+    expect(tasks().find((t) => t.id === first.id)?.done).toBe(false);
+    expect(tasks().find((t) => t.id === second.id)?.done).toBe(true);
   });
 });
 

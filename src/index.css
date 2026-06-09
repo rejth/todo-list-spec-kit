@@ -149,6 +149,19 @@ body {
 
 .task-item__name {
   flex: 1 1 auto;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.task-item__name--done {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
 }
 
 .task-list__empty {
