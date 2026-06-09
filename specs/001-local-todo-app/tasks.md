@@ -150,17 +150,17 @@ Single project at repository root: `src/`, `tests/`
 
 ---
 
-- [ ] T007 **Phase 7: Polish** (issue #7)
+- [x] T007 **Phase 7: Polish** (issue #7)
 
   **Goal**: Accessibility, UI polish, full validation.
 
   **Checkpoint**: `pnpm check` passes; quickstart scenarios validated.
 
-  - [ ] Keyboard: tab order (add → search → filters → rows); Enter/Space on task name
-  - [ ] `role="group"`, `aria-label="Filter tasks"` on `FilterBar.tsx`
-  - [ ] Final layout/spacing per ui-contract in `src/index.css`
-  - [ ] Run `pnpm check`; fix failures
-  - [ ] Manual validation: all scenarios in `quickstart.md`
+  - [x] Keyboard: tab order (add → search → filters → rows); Enter/Space on task name
+  - [x] `role="group"`, `aria-label="Filter tasks"` on `FilterBar.tsx`
+  - [x] Final layout/spacing per ui-contract in `src/index.css`
+  - [x] Run `pnpm check`; fix failures
+  - [x] Manual validation: all scenarios in `quickstart.md`
 
 ---
 

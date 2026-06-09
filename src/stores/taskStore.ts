@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createMemo, createRoot, createSignal } from "solid-js";
 import { getStatusSummary, getVisibleTasks } from "../lib/filters";
 import { StorageService } from "../lib/storage/StorageService";
 import type { Filter, NewTask, Task } from "../types/task";
@@ -16,26 +16,25 @@ export const tasks = tasksSignal;
 /** Last persistence failure message, or null when healthy. */
 export const persistenceError = errorSignal;
 
-/** Active/done counts over all tasks; drives the header summary. */
-export const statusSummary = createMemo(() => getStatusSummary(tasksSignal()));
-
 /** Current list filter (ephemeral view state, not persisted). */
 export const filter = filterSignal;
 
 /** Current case-insensitive search query (ephemeral, not persisted). */
 export const searchQuery = searchSignal;
 
-/** Tasks projected through the active filter and search query. */
-export const visibleTasks = createMemo(() =>
-  getVisibleTasks(tasksSignal(), filterSignal(), searchSignal()),
-);
+const { statusSummary, visibleTasks } = createRoot(() => ({
+  /** Active/done counts over all tasks; drives the header summary. */
+  statusSummary: createMemo(() => getStatusSummary(tasksSignal())),
+  /** Tasks projected through the active filter and search query. */
+  visibleTasks: createMemo(() => getVisibleTasks(tasksSignal(), filterSignal(), searchSignal())),
+}));
 
-/** Sets the list filter (all/active/done). */
+export { statusSummary, visibleTasks };
+
 export function setFilter(value: Filter): void {
   setFilterSignal(value);
 }
 
-/** Sets the search query. */
 export function setSearchQuery(value: string): void {
   setSearchSignal(value);
 }
@@ -58,26 +57,26 @@ export async function initTaskStore(): Promise<void> {
 
 /**
  * Validates and persists a new task, then appends it to the in-memory list.
- * Empty or whitespace-only names are rejected silently (UI shows inline validation).
  */
 export async function addTask(name: string): Promise<void> {
   const trimmed = name.trim();
-  if (!trimmed) {
-    return;
-  }
+  if (!trimmed) return;
+
   if (!service) {
     setError("Storage is not ready.");
     return;
   }
+
   const record: NewTask = {
     name: trimmed,
     done: false,
     important: false,
     createdAt: Date.now(),
   };
+
   try {
-    const id = (await service.tasks.add(record)) as number;
-    setTasks([...tasksSignal(), { id, ...record }]);
+    const id = await service.tasks.add(record);
+    setTasks([...tasksSignal(), { id: id as number, ...record }]);
     setError(null);
   } catch (err) {
     setError(err instanceof Error ? err.message : "Failed to save task.");
@@ -93,46 +92,41 @@ async function patchTask(id: number, patch: Partial<Task>): Promise<void> {
     setError("Storage is not ready.");
     return;
   }
+
   try {
     await service.tasks.update(id, patch);
+    setTasks(tasksSignal().map((task) => (task.id === id ? { ...task, ...patch } : task)));
     setError(null);
   } catch (err) {
     setError(err instanceof Error ? err.message : "Failed to save task.");
   }
-  setTasks(tasksSignal().map((task) => (task.id === id ? { ...task, ...patch } : task)));
 }
 
-/** Toggles a task's completion state and persists it. */
 export async function toggleDone(id: number): Promise<void> {
   const current = tasksSignal().find((task) => task.id === id);
-  if (!current) {
-    return;
-  }
+  if (!current) return;
   await patchTask(id, { done: !current.done });
 }
 
-/** Toggles a task's important flag and persists it. */
 export async function toggleImportant(id: number): Promise<void> {
   const current = tasksSignal().find((task) => task.id === id);
-  if (!current) {
-    return;
-  }
+  if (!current) return;
   await patchTask(id, { important: !current.important });
 }
 
-/** Removes a task from storage and the in-memory list. */
 export async function deleteTask(id: number): Promise<void> {
   if (!service) {
     setError("Storage is not ready.");
     return;
   }
+
   try {
     await service.tasks.delete(id);
+    setTasks(tasksSignal().filter((task) => task.id !== id));
     setError(null);
   } catch (err) {
     setError(err instanceof Error ? err.message : "Failed to delete task.");
   }
-  setTasks(tasksSignal().filter((task) => task.id !== id));
 }
 
 /** Test-only: drop the cached service and reset in-memory state. */

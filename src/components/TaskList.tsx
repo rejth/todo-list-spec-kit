@@ -2,10 +2,6 @@ import { For, Show } from "solid-js";
 import { tasks, visibleTasks } from "../stores/taskStore";
 import { TaskItem } from "./TaskItem";
 
-/**
- * Bordered list of the visible (filtered + searched) tasks, with distinct
- * empty states for "no tasks at all" vs "nothing matches the current view".
- */
 export function TaskList() {
   return (
     <Show

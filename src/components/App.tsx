@@ -7,7 +7,6 @@ import { Header } from "./Header";
 import { SearchBar } from "./SearchBar";
 import { TaskList } from "./TaskList";
 
-/** Root component. Initializes storage on mount; shows loading until IDB is ready. */
 export function App() {
   const [ready, setReady] = createSignal(false);
 

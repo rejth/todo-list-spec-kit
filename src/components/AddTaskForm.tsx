@@ -1,17 +1,18 @@
 import { createSignal, Show } from "solid-js";
 import { addTask } from "../stores/taskStore";
 
-/** Input + button to add a task. Blocks empty/whitespace names with inline validation. */
 export function AddTaskForm() {
   const [value, setValue] = createSignal("");
   const [error, setError] = createSignal(false);
 
   async function submit(event: Event) {
     event.preventDefault();
+
     if (!value().trim()) {
       setError(true);
       return;
     }
+
     await addTask(value());
     setValue("");
     setError(false);
@@ -24,14 +25,12 @@ export function AddTaskForm() {
         type="text"
         placeholder="type to add new task"
         value={value()}
-        onInput={(event) => {
-          setValue(event.currentTarget.value);
-          if (error()) {
-            setError(false);
-          }
-        }}
         aria-label="New task name"
         aria-invalid={error()}
+        onInput={(event) => {
+          setValue(event.currentTarget.value);
+          if (error()) setError(false);
+        }}
       />
       <button class="add-form__button" type="submit">
         Add task

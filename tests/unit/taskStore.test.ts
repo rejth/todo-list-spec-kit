@@ -19,6 +19,7 @@ describe("taskStore.addTask", () => {
 
   it("addTask makes task appear in tasks list", async () => {
     await addTask("Buy milk");
+
     expect(tasks().map((t) => t.name)).toEqual(["Buy milk"]);
     expect(tasks()[0]).toMatchObject({ done: false, important: false });
   });
@@ -26,6 +27,7 @@ describe("taskStore.addTask", () => {
   it("addTask rejects empty or whitespace-only name", async () => {
     await addTask("");
     await addTask("   ");
+
     expect(tasks()).toHaveLength(0);
   });
 
@@ -38,6 +40,7 @@ describe("taskStore.addTask", () => {
     await addTask("same");
     await addTask("same");
     const ids = tasks().map((t) => t.id);
+
     expect(tasks()).toHaveLength(2);
     expect(ids[0]).not.toBe(ids[1]);
   });

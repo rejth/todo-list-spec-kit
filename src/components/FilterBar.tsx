@@ -8,11 +8,10 @@ const OPTIONS: { value: Filter; label: string }[] = [
   { value: "done", label: "Done" },
 ];
 
-/** Segmented control selecting the active list filter. */
 export function FilterBar() {
   return (
-    // biome-ignore lint/a11y/useSemanticElements: ui-contract mandates role="group" with aria-label for the segmented filter control
-    <div class="filter-bar" role="group" aria-label="Filter tasks">
+    <fieldset class="filter-bar">
+      <legend class="filter-bar__legend">Filter tasks</legend>
       <For each={OPTIONS}>
         {(option) => (
           <button
@@ -26,6 +25,6 @@ export function FilterBar() {
           </button>
         )}
       </For>
-    </div>
+    </fieldset>
   );
 }
