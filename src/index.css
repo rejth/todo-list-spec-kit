@@ -1,0 +1,56 @@
+/*
+ * Design tokens + base layout for the To-Do List app.
+ * Token values per specs/001-local-todo-app/contracts/ui-contract.md § Color Reference.
+ * Component styles (task rows, filters, etc.) are added in later phases.
+ */
+
+:root {
+  /* Color tokens */
+  --color-primary: #007bff;
+  --color-text: #212529;
+  --color-text-muted: #6c757d;
+  --color-border: #ced4da;
+  --color-danger: #dc3545;
+  --color-success: #28a745;
+  --color-bg: #ffffff;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+
+  /* Radius + typography */
+  --radius: 6px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+/* Centered single-column content area per ui-contract layout. */
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+}

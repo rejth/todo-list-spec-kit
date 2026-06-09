@@ -30,20 +30,20 @@ Single project at repository root: `src/`, `tests/`
 
 ---
 
-- [ ] T001 **Phase 1: Setup** — Initialize Vite + Solid + TypeScript with pnpm and quality tooling (issue #1)
+- [x] T001 **Phase 1: Setup** — Initialize Vite + Solid + TypeScript with pnpm and quality tooling (issue #1)
 
   **Deliverables**: Runnable dev server; empty test suite passes; directory scaffold; base CSS tokens.
 
   **Checkpoint**: `pnpm install && pnpm dev` starts; `pnpm test` passes.
 
-  - [ ] Create Vite + Solid + TypeScript project; scripts: `dev`, `build`, `test`, `lint`, `check` in `package.json`
-  - [ ] Add `tiny-idb-store@^0.1.2` via `pnpm add tiny-idb-store`
-  - [ ] Configure Vitest + `fake-indexeddb` in `vitest.config.ts`, `tests/setup.ts`
-  - [ ] Configure Biome in `biome.json`
-  - [ ] Configure Oxlint in `.oxlintrc.json`
-  - [ ] Configure Lefthook in `lefthook.yml` (pre-commit: `pnpm lint`, `pnpm test`)
-  - [ ] Create scaffold: `src/components/`, `src/stores/`, `src/lib/storage/`, `src/types/`, `tests/unit/`, `tests/integration/`
-  - [ ] Add design tokens and base layout in `src/index.css` per `contracts/ui-contract.md`
+  - [x] Create Vite + Solid + TypeScript project; scripts: `dev`, `build`, `test`, `lint`, `check` in `package.json`
+  - [x] Add `tiny-idb-store@^0.1.2` via `pnpm add tiny-idb-store`
+  - [x] Configure Vitest + `fake-indexeddb` in `vitest.config.ts`, `tests/setup.ts`
+  - [x] Configure Biome in `biome.json`
+  - [x] Configure Oxlint in `.oxlintrc.json`
+  - [x] Configure Lefthook in `lefthook.yml` (pre-commit: `pnpm lint`, `pnpm test`)
+  - [x] Create scaffold: `src/components/`, `src/stores/`, `src/lib/storage/`, `src/types/`, `tests/unit/`, `tests/integration/`
+  - [x] Add design tokens and base layout in `src/index.css` per `contracts/ui-contract.md`
 
 ---
 
