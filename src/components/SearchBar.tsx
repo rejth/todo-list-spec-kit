@@ -1,6 +1,5 @@
 import { searchQuery, setSearchQuery } from "../stores/taskStore";
 
-/** Text input that filters the visible list by case-insensitive name match. */
 export function SearchBar() {
   return (
     <input

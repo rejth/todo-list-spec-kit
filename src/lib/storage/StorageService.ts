@@ -4,7 +4,6 @@ const DB_NAME = "todo-db";
 const DB_VERSION = 1;
 const STORE_NAME = "tasks";
 
-/** Singleton managing the IndexedDB connection lifecycle and TasksStore access. */
 export class StorageService {
   private static instance: StorageService | null = null;
 
@@ -13,7 +12,6 @@ export class StorageService {
 
   private constructor() {}
 
-  /** TasksStore for the open connection. Throws if the service is not initialized. */
   get tasks(): TasksStore {
     if (!this.tasksStore) {
       throw new Error("StorageService is not initialized.");
@@ -21,7 +19,6 @@ export class StorageService {
     return this.tasksStore;
   }
 
-  /** Opens the connection once and caches the singleton instance. */
   static async create(): Promise<StorageService> {
     if (StorageService.instance) {
       return StorageService.instance;
@@ -32,7 +29,6 @@ export class StorageService {
     return instance;
   }
 
-  /** Drops the cached singleton so the next create() opens a fresh connection. */
   static reset(): void {
     StorageService.instance?.db?.close();
     StorageService.instance = null;

@@ -1,10 +1,6 @@
 import { deleteTask, toggleDone, toggleImportant } from "../stores/taskStore";
 import type { Task } from "../types/task";
 
-/**
- * A single task row. Clicking the name toggles completion (strikethrough when done);
- * the trash button deletes and the "!" button toggles the important flag.
- */
 export function TaskItem(props: { task: Task }) {
   return (
     <li class="task-item">

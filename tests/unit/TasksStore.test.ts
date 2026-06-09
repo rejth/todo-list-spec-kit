@@ -3,7 +3,12 @@ import { StorageService } from "../../src/lib/storage/StorageService";
 import type { NewTask, Task } from "../../src/types/task";
 
 function makeTask(name: string): NewTask {
-  return { name, done: false, important: false, createdAt: 1 };
+  return {
+    name,
+    done: false,
+    important: false,
+    createdAt: 1,
+  };
 }
 
 describe("TasksStore", () => {
@@ -17,6 +22,7 @@ describe("TasksStore", () => {
   it("add makes task retrievable by id", async () => {
     const id = await service.tasks.add(makeTask("Buy milk"));
     const task = await service.tasks.get(id);
+
     expect(task).toMatchObject({ id, name: "Buy milk", done: false });
   });
 
@@ -24,6 +30,7 @@ describe("TasksStore", () => {
     await service.tasks.add(makeTask("One"));
     await service.tasks.add(makeTask("Two"));
     const all = await service.tasks.getAll<Task>();
+
     expect(all.map((t) => t.name)).toEqual(["One", "Two"]);
   });
 
@@ -31,6 +38,7 @@ describe("TasksStore", () => {
     const id = await service.tasks.add(makeTask("Toggle me"));
     const ok = await service.tasks.update(id, { done: true, important: true });
     expect(ok).toBe(true);
+
     const task = await service.tasks.get<Task>(id);
     expect(task).toMatchObject({ done: true, important: true });
   });
@@ -39,6 +47,7 @@ describe("TasksStore", () => {
     const id = await service.tasks.add(makeTask("Remove me"));
     await service.tasks.delete(id);
     const all = await service.tasks.getAll<Task>();
+
     expect(all).toEqual([]);
   });
 });
