@@ -1,13 +1,21 @@
+import { toggleDone } from "../stores/taskStore";
 import type { Task } from "../types/task";
 
 /**
- * A single task row. Phase T003 renders the name only; completion toggle,
- * delete, and important controls arrive in later phases.
+ * A single task row. Clicking the name toggles completion (strikethrough when done).
+ * Delete and important controls arrive in later phases.
  */
 export function TaskItem(props: { task: Task }) {
   return (
     <li class="task-item">
-      <span class="task-item__name">{props.task.name}</span>
+      <button
+        type="button"
+        class="task-item__name"
+        classList={{ "task-item__name--done": props.task.done }}
+        onClick={() => toggleDone(props.task.id)}
+      >
+        {props.task.name}
+      </button>
     </li>
   );
 }

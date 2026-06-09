@@ -61,6 +61,33 @@ export async function addTask(name: string): Promise<void> {
   }
 }
 
+/**
+ * Persists `patch` for the task with `id`, then mirrors the change in memory.
+ * Keeps the session state even if the write fails, surfacing persistenceError.
+ */
+async function patchTask(id: number, patch: Partial<Task>): Promise<void> {
+  if (!service) {
+    setError("Storage is not ready.");
+    return;
+  }
+  try {
+    await service.tasks.update(id, patch);
+    setError(null);
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "Failed to save task.");
+  }
+  setTasks(tasksSignal().map((task) => (task.id === id ? { ...task, ...patch } : task)));
+}
+
+/** Toggles a task's completion state and persists it. */
+export async function toggleDone(id: number): Promise<void> {
+  const current = tasksSignal().find((task) => task.id === id);
+  if (!current) {
+    return;
+  }
+  await patchTask(id, { done: !current.done });
+}
+
 /** Test-only: drop the cached service and reset in-memory state. */
 export function resetTaskStore(): void {
   StorageService.reset();

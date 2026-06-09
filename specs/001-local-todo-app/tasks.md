@@ -92,7 +92,7 @@ Single project at repository root: `src/`, `tests/`
 
 ---
 
-- [ ] T004 **Phase 4: User Story 2 — Complete Tasks (P2)** (issue #5)
+- [x] T004 **Phase 4: User Story 2 — Complete Tasks (P2)** (issue #5)
 
   **Goal**: Click name toggles done; strikethrough styling.
 
@@ -100,13 +100,13 @@ Single project at repository root: `src/`, `tests/`
 
   **TDD cycles**:
 
-  - [ ] RED→GREEN: `"toggleDone flips done flag and persists"`
-  - [ ] RED→GREEN: `"toggleDone affects only the targeted task"`
+  - [x] RED→GREEN: `"toggleDone flips done flag and persists"`
+  - [x] RED→GREEN: `"toggleDone affects only the targeted task"`
 
   **UI**:
 
-  - [ ] Clickable task name → `toggleDone` in `TaskItem.tsx`
-  - [ ] Strikethrough styling in `TaskItem.tsx`, `src/index.css`
+  - [x] Clickable task name → `toggleDone` in `TaskItem.tsx`
+  - [x] Strikethrough styling in `TaskItem.tsx`, `src/index.css`
 
 ---
 
