@@ -1,13 +1,23 @@
 import { For, Show } from "solid-js";
-import { tasks } from "../stores/taskStore";
+import { tasks, visibleTasks } from "../stores/taskStore";
 import { TaskItem } from "./TaskItem";
 
-/** Bordered list of tasks with an empty-state message when there are none. */
+/**
+ * Bordered list of the visible (filtered + searched) tasks, with distinct
+ * empty states for "no tasks at all" vs "nothing matches the current view".
+ */
 export function TaskList() {
   return (
-    <Show when={tasks().length > 0} fallback={<p class="task-list__empty">No tasks yet</p>}>
+    <Show
+      when={visibleTasks().length > 0}
+      fallback={
+        <p class="task-list__empty">
+          {tasks().length === 0 ? "No tasks yet" : "No tasks match your search"}
+        </p>
+      }
+    >
       <ul class="task-list">
-        <For each={tasks()}>{(task) => <TaskItem task={task} />}</For>
+        <For each={visibleTasks()}>{(task) => <TaskItem task={task} />}</For>
       </ul>
     </Show>
   );

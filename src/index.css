@@ -126,6 +126,56 @@ body {
   font-size: var(--font-size-sm);
 }
 
+/* Toolbar: search input grows, filter group sits to its right. */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.search-bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: var(--font-size-base);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* Segmented filter control with joined borders. */
+.filter-bar {
+  flex: 0 0 auto;
+  display: inline-flex;
+}
+
+.filter-bar__button {
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-left-width: 0;
+  cursor: pointer;
+}
+
+.filter-bar__button:first-child {
+  border-left-width: 1px;
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+}
+
+.filter-bar__button:last-child {
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.filter-bar__button--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
 /* Task list: bordered container with thin row separators. */
 .task-list {
   list-style: none;

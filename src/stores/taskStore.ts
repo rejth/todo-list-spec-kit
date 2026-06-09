@@ -1,10 +1,12 @@
 import { createMemo, createSignal } from "solid-js";
-import { getStatusSummary } from "../lib/filters";
+import { getStatusSummary, getVisibleTasks } from "../lib/filters";
 import { StorageService } from "../lib/storage/StorageService";
-import type { NewTask, Task } from "../types/task";
+import type { Filter, NewTask, Task } from "../types/task";
 
 const [tasksSignal, setTasks] = createSignal<Task[]>([]);
 const [errorSignal, setError] = createSignal<string | null>(null);
+const [filterSignal, setFilterSignal] = createSignal<Filter>("all");
+const [searchSignal, setSearchSignal] = createSignal("");
 
 let service: StorageService | null = null;
 
@@ -16,6 +18,27 @@ export const persistenceError = errorSignal;
 
 /** Active/done counts over all tasks; drives the header summary. */
 export const statusSummary = createMemo(() => getStatusSummary(tasksSignal()));
+
+/** Current list filter (ephemeral view state, not persisted). */
+export const filter = filterSignal;
+
+/** Current case-insensitive search query (ephemeral, not persisted). */
+export const searchQuery = searchSignal;
+
+/** Tasks projected through the active filter and search query. */
+export const visibleTasks = createMemo(() =>
+  getVisibleTasks(tasksSignal(), filterSignal(), searchSignal()),
+);
+
+/** Sets the list filter (all/active/done). */
+export function setFilter(value: Filter): void {
+  setFilterSignal(value);
+}
+
+/** Sets the search query. */
+export function setSearchQuery(value: string): void {
+  setSearchSignal(value);
+}
 
 function sortByCreatedAt(list: Task[]): Task[] {
   return list.toSorted((a, b) => a.createdAt - b.createdAt);
