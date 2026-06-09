@@ -164,6 +164,41 @@ body {
   color: var(--color-text-muted);
 }
 
+.task-item__name--important {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Icon action buttons: bordered squares, color by role. */
+.task-item__action {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: var(--space-2);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.task-item__action--delete {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.task-item__action--important {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.task-item__action--important.task-item__action--active {
+  background: var(--color-success);
+  color: var(--color-bg);
+}
+
 .task-list__empty {
   margin: 0;
   padding: var(--space-4);
