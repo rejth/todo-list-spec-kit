@@ -128,7 +128,7 @@ Single project at repository root: `src/`, `tests/`
 
 ---
 
-- [ ] T006 **Phase 6: User Story 4 — Search and Filter (P4)** (issue #6)
+- [x] T006 **Phase 6: User Story 4 — Search and Filter (P4)** (issue #6)
 
   **Goal**: All / Active / Done filters + case-insensitive search (intersection).
 
@@ -136,17 +136,17 @@ Single project at repository root: `src/`, `tests/`
 
   **TDD cycles** (`tests/unit/filters.test.ts` → `src/lib/filters.ts`):
 
-  - [ ] RED→GREEN: active filter shows only non-done tasks
-  - [ ] RED→GREEN: done filter shows only done tasks
-  - [ ] RED→GREEN: all filter shows every task
-  - [ ] RED→GREEN: case-insensitive substring search
-  - [ ] RED→GREEN: search ∩ filter intersection
-  - [ ] RED→GREEN: no matches → empty list, no error
+  - [x] RED→GREEN: active filter shows only non-done tasks
+  - [x] RED→GREEN: done filter shows only done tasks
+  - [x] RED→GREEN: all filter shows every task
+  - [x] RED→GREEN: case-insensitive substring search
+  - [x] RED→GREEN: search ∩ filter intersection
+  - [x] RED→GREEN: no matches → empty list, no error
 
   **Store + UI**:
 
-  - [ ] `filter`, `searchQuery`, `visibleTasks`, setters in `src/stores/taskStore.ts`
-  - [ ] `SearchBar.tsx`, `FilterBar.tsx`; update `TaskList.tsx`, `App.tsx`
+  - [x] `filter`, `searchQuery`, `visibleTasks`, setters in `src/stores/taskStore.ts`
+  - [x] `SearchBar.tsx`, `FilterBar.tsx`; update `TaskList.tsx`, `App.tsx`
 
 ---
 
