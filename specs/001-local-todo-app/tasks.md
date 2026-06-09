@@ -66,7 +66,7 @@ Single project at repository root: `src/`, `tests/`
 
 ---
 
-- [ ] T003 **Phase 3: User Story 1 — Add and View Tasks (P1)** 🎯 MVP (issue #3)
+- [x] T003 **Phase 3: User Story 1 — Add and View Tasks (P1)** 🎯 MVP (issue #3)
 
   **Goal**: Add tasks, flat list, persist across refresh.
 
@@ -76,19 +76,19 @@ Single project at repository root: `src/`, `tests/`
 
   **TDD cycles** (store — sequential):
 
-  - [ ] RED→GREEN: `"addTask makes task appear in tasks list"` → `addTask` in `src/stores/taskStore.ts`
-  - [ ] RED→GREEN: `"addTask rejects empty or whitespace-only name"`
-  - [ ] RED→GREEN: `"addTask trims leading and trailing whitespace"`
-  - [ ] RED→GREEN: `"duplicate names create distinct tasks"`
-  - [ ] RED→GREEN: `"initTaskStore restores tasks after StorageService re-create"` in `tests/integration/persistence.test.ts`
-  - [ ] RED→GREEN: `"persistence failure sets persistenceError"`
+  - [x] RED→GREEN: `"addTask makes task appear in tasks list"` → `addTask` in `src/stores/taskStore.ts`
+  - [x] RED→GREEN: `"addTask rejects empty or whitespace-only name"`
+  - [x] RED→GREEN: `"addTask trims leading and trailing whitespace"`
+  - [x] RED→GREEN: `"duplicate names create distinct tasks"`
+  - [x] RED→GREEN: `"initTaskStore restores tasks after StorageService re-create"` in `tests/integration/persistence.test.ts`
+  - [x] RED→GREEN: `"persistence failure sets persistenceError"`
 
   **UI** (after store cycles GREEN):
 
-  - [ ] `Header.tsx` — title + `{active} more to do, {done} done`
-  - [ ] `AddTaskForm.tsx` — placeholder "type to add new task", validation
-  - [ ] `TaskList.tsx`, `TaskItem.tsx` (name only), `ErrorBanner.tsx`
-  - [ ] Wire `App.tsx`: Header → AddTaskForm → TaskList + ErrorBanner per ui-contract
+  - [x] `Header.tsx` — title + `{active} more to do, {done} done`
+  - [x] `AddTaskForm.tsx` — placeholder "type to add new task", validation
+  - [x] `TaskList.tsx`, `TaskItem.tsx` (name only), `ErrorBanner.tsx`
+  - [x] Wire `App.tsx`: Header → AddTaskForm → TaskList + ErrorBanner per ui-contract
 
 ---
 

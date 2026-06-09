@@ -1,5 +1,9 @@
 import { createSignal, onMount, Show } from "solid-js";
-import { initTaskStore, persistenceError } from "../stores/taskStore";
+import { initTaskStore } from "../stores/taskStore";
+import { AddTaskForm } from "./AddTaskForm";
+import { ErrorBanner } from "./ErrorBanner";
+import { Header } from "./Header";
+import { TaskList } from "./TaskList";
 
 /** Root component. Initializes storage on mount; shows loading until IDB is ready. */
 export function App() {
@@ -12,10 +16,11 @@ export function App() {
 
   return (
     <main class="app">
-      <h1>To-Do List</h1>
+      <Header />
       <Show when={ready()} fallback={<p class="app__loading">Loading…</p>}>
-        <Show when={persistenceError()}>{(message) => <p class="app__error">{message()}</p>}</Show>
-        {/* Header, add form, search, filters, and list arrive in later phases. */}
+        <ErrorBanner />
+        <AddTaskForm />
+        <TaskList />
       </Show>
     </main>
   );
